@@ -8,8 +8,7 @@ def create_demo():
     iface1 = gr.Interface(
         fn=engine.sentiment_analysis,
         inputs=gr.Textbox(label="name", lines=5, value="I've been waiting for a EE471 course my whole life."),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 2. Zero-Shot
@@ -19,8 +18,7 @@ def create_demo():
             gr.Textbox(label="text", lines=3, value="Berkshire keeps their cash reserves at an extremely high level."),
             gr.Textbox(label="candidate_labels", value="finance, sports, technology")
         ],
-        outputs="label",
-        allow_flagging="never"
+        outputs="label"
     )
     
     # 3. Text Generation
@@ -30,24 +28,21 @@ def create_demo():
             gr.Textbox(label="prompt", lines=3, value="If I continue to successfully complete all in-class exercises in EE471 course,"),
             gr.Slider(minimum=10, maximum=100, value=35, step=1, label="max_length")
         ],
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
     
     # 4. Mask Filling
     iface4 = gr.Interface(
         fn=engine.mask_filling,
         inputs=gr.Textbox(label="text", lines=5, value="To understand generative AI, one must study <mask> well."),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 5. NER
     iface5 = gr.Interface(
         fn=engine.named_entity_recognition,
         inputs=gr.Textbox(label="text", lines=5, value="I am Nate, a research assistant in Izmir Institute of Technology, and currently living and working in beautiful city İzmir in Türkiye."),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 6. Question Answering
@@ -57,40 +52,35 @@ def create_demo():
             gr.Textbox(label="context", lines=3, value="I am Nate, a research assistant in Izmir Institute of Technology, and currently living and working in beautiful city İzmir in Türkiye."),
             gr.Textbox(label="question", value="Where does he live?")
         ],
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 7. Summarization
     iface7 = gr.Interface(
         fn=engine.text_summarization,
         inputs=gr.Textbox(label="text", lines=7, value="The 2008 Global Financial Crisis stands as the most severe economic collapse of the 21st century, often compared to the Great Depression of the 1930s. Triggered by the bursting of the United States housing bubble, its effects rippled across the globe, leading to the collapse of major financial institutions and a deep international recession. The crisis began with the subprime mortgage market. In the early 2000s, low interest rates and a push for homeownership led banks to issue high-risk loans to borrowers with poor credit."),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 8. Translation
     iface8 = gr.Interface(
         fn=engine.text_translation,
         inputs=gr.Textbox(label="text", lines=5, value="The 2008 Global Financial Crisis stands as the most severe economic collapse of the 21st century, often compared to the Great Depression."),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     # 9. Image Classification
     iface9 = gr.Interface(
         fn=engine.image_classification,
         inputs=gr.Image(type="filepath", label="image"),
-        outputs="label",
-        allow_flagging="never"
+        outputs="label"
     )
 
     # 10. Speech Recognition
     iface10 = gr.Interface(
         fn=engine.automatic_speech_recognition,
         inputs=gr.Audio(type="filepath", label="audio"),
-        outputs=gr.Textbox(label="output", lines=5),
-        allow_flagging="never"
+        outputs=gr.Textbox(label="output", lines=5)
     )
 
     demo = gr.TabbedInterface(
