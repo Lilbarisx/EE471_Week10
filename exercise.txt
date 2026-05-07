@@ -1,0 +1,59 @@
+EE471 – Modern Software Dev.                                                                       07/05/202 6 
+ 
+Izmir Institute of Technology  
+Electrical and Electronics Eng. Dep.  
+ 
+EE 471 Modern Software Development 
+Practices and Technologies  
+In-class exercise Week  #10 
+Thursday  07/05/202 6 
+__________________________________________________________________________________________  
+Task 1: Read through the HuggingFace LLM course do c and implement:  them in Python.  
+Transformers and sentiment analysis :  
+- Apply a sentiment analysis for the following two sentences : “I've been waiting for a EE471 course 
+my whole life.”  and “I hate EE471 course”  
+- Zero-shot classification for: “Berkshire keeps their cash reserves at an extremely high level.”  
+- Complete the following sentence “If I continue to successfully complete all in -class exercises in 
+EE471 course,”  with a maximum length of 35 words, return two alternative sentences.  
+- Use transformers to fill the gap in the following sentence “To understand generative AI, one 
+must study [ …] well.”  
+- Use named entity recognition to extract the name of the subject, which company do they work, 
+and where do they live from the following sentence “ I am Nate , a research assistant  in Izmir 
+Institute of Technology, and  currently living and working in beautiful city İzmir in Türkiye .” 
+- Validate the extracted  person, organization, and city info above via question answering . 
+- Summarize the following text: “The 2008 Global Financial Crisis stands as the most severe 
+economic collapse of the 21st century, often compared to the Great Depression of the 
+1930s. Triggered by the bursting of the United States housing bubble, its effects rippled 
+across the globe, lea ding to the collapse of major financial institutions and a deep 
+international recession. The crisis began with the subprime mortgage market. In the early 
+2000s, low interest rates and a push for homeownership led banks to issue high -risk loans 
+to borrowers  with poor credit. “  
+- Translate the following sentence: “The 2008 Global Financial Crisis stands as the most 
+severe economic collapse of the 21st century, often compared to the Great Depression.”  
+- Use G oogle ’s /vit-base -patch16 -224 for a basic image classification task.  
+- Use openAI’s whisper -large -v3 model for automatic speech recognition.  
+Deliverables (Deadline: Until the end of the lecture ): Link for your github repo  (latest push).  
+ 
+EE471 – Modern Software Dev.                                                                       07/05/202 6 
+__________________________________________________________________________________________  
+Task 2: Read through the HuggingFace LLM course doc ( 2nd chapter ) and implement the following 
+tasks in Python:  
+- In OOP manner write a python module capable of each of the tasks in Task 1:  
+ 
+Sentiment analysis  Question Answering  
+Zero -shot classification  Text Summarization  
+Text generation (from an incomplete 
+sentence)  Text Translation  
+Mask filling  Image classification  
+Named entity Recognition  Automatic speech recognition  
+ 
+ 
+- Use this software module and Gradio to develop an interactive demo for each of the tasks with 
+a Gradio -based front end, e.g.:  
+ 
+ 
+Deliverables (Deadline: until midnight):  
+1) The link for your public github repository  
+2) A screen recording video demonstrating each of the tasks: Task 1 & Task 2, with the 
+explanation of code blocks  similar to the previous week’s exercise . 
+ 

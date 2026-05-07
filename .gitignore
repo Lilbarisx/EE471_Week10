@@ -1,0 +1,11 @@
+__pycache__/
+*.flac
+*.wav
+*.mp3
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
