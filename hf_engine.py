@@ -1,3 +1,5 @@
+import os
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 import torch
 from transformers import pipeline
 import warnings
@@ -31,8 +33,8 @@ class HuggingFaceEngine:
 
     def text_generation(self, text, max_length=35):
         if not text: return "Please enter text."
-        pipe = self.get_pipeline("text-generation")
-        results = pipe(text, max_length=int(max_length), num_return_sequences=2)
+        pipe = self.get_pipeline("text-generation", model="gpt2")
+        results = pipe(text, max_new_tokens=int(max_length), num_return_sequences=2)
         return "\n".join([f"Option {i+1}: {res['generated_text']}" for i, res in enumerate(results)])
 
     def mask_filling(self, text):
@@ -66,9 +68,8 @@ class HuggingFaceEngine:
     def text_summarization(self, text):
         if not text: return "Please enter text."
         pipe = self.get_pipeline("summarization")
-        input_len = len(text.split())
-        max_len = min(50, max(10, input_len // 2))
-        result = pipe(text, max_length=max_len, min_length=10, do_sample=False)
+        # Sabit ve yeterli bir uzunluk veriyoruz ki cümle yarım kalmasın
+        result = pipe(text, max_length=60, min_length=20, do_sample=False)
         return result[0]['summary_text']
 
     def text_translation(self, text):
@@ -85,7 +86,8 @@ class HuggingFaceEngine:
 
     def automatic_speech_recognition(self, audio_path):
         if audio_path is None: return "Please upload an audio file."
-        # Note: Using whisper-large-v3 as per PDF. This might take some time to download.
         pipe = self.get_pipeline("automatic-speech-recognition", model="openai/whisper-large-v3")
-        result = pipe(audio_path)
+        import soundfile as sf
+        audio, sr = sf.read(audio_path, dtype="float32")
+        result = pipe({"array": audio, "sampling_rate": sr})
         return result['text']

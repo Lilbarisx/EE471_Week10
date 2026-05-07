@@ -1,3 +1,5 @@
+import os
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 import torch
 from transformers import pipeline
 import requests
@@ -27,9 +29,9 @@ def main():
 
     # 3. Text Generation
     print("\n--- 3. Text Generation ---")
-    generator = pipeline("text-generation")
+    generator = pipeline("text-generation", model="gpt2")
     prompt = "If I continue to successfully complete all in-class exercises in EE471 course,"
-    gen_results = generator(prompt, max_length=35, num_return_sequences=2)
+    gen_results = generator(prompt, max_new_tokens=35, num_return_sequences=2)
     print(f"Prompt: '{prompt}'")
     for i, res in enumerate(gen_results):
         print(f"Option {i+1}: {res['generated_text']}")
@@ -76,7 +78,7 @@ def main():
     print("\n--- 7. Summarization ---")
     summarizer = pipeline("summarization")
     long_text = "The 2008 Global Financial Crisis stands as the most severe economic collapse of the 21st century, often compared to the Great Depression of the 1930s. Triggered by the bursting of the United States housing bubble, its effects rippled across the globe, leading to the collapse of major financial institutions and a deep international recession. The crisis began with the subprime mortgage market. In the early 2000s, low interest rates and a push for homeownership led banks to issue high-risk loans to borrowers with poor credit."
-    summary = summarizer(long_text, max_length=50, min_length=20, do_sample=False)
+    summary = summarizer(long_text, max_length=60, min_length=20, do_sample=False)
     print(f"Original Length: {len(long_text)} characters")
     print(f"Summary: {summary[0]['summary_text']}")
 
@@ -110,10 +112,10 @@ def main():
         audio_url = "https://huggingface.co/datasets/Narsil/asr_dummy/resolve/main/mlk.flac"
         urllib.request.urlretrieve(audio_url, "sample_audio.flac")
         
-        # NOTE: Using a smaller model here to avoid massive download time during class,
-        # but the PDF specifies openai/whisper-large-v3. We'll use the required one.
         asr_pipeline = pipeline("automatic-speech-recognition", model="openai/whisper-large-v3")
-        asr_result = asr_pipeline("sample_audio.flac")
+        import soundfile as sf
+        audio, sr = sf.read("sample_audio.flac", dtype="float32")
+        asr_result = asr_pipeline({"array": audio, "sampling_rate": sr})
         print(f"Transcribed Text: {asr_result['text']}")
     except Exception as e:
         print(f"ASR failed: {e}")
